@@ -8,6 +8,7 @@ const Product = (props) => {
     const {name, img, seller, price, stock, star, features} = props.product;
     
     for(const feature of features) {
+        // const featureDetails = Object.entries(feature);
         const featureDetails = feature ? feature : 'No feature available';
         console.log(featureDetails);
     }

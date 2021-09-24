@@ -1,0 +1,40 @@
+.search-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(68, 68, 68);
+    padding: 7px 0px;
+}
+.search-container input{
+   width: 60%;
+   height:20px;
+   border: none;
+   outline: none;
+   /* background-color: #06abeb;
+   color: #fff; */
+   padding: 5px;
+   margin-right: 10px;
+}
+/* .search-container input::placeholder {
+  color: #fff;
+} */
+.search-container p{
+    color: white;
+}
+.search-container p span{
+    padding:5px 10px;
+    color: #fff;
+    background-color: #06abeb;
+}
+
+/* Shop */
+
+.shop-container{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.product-container{
+    border-right: 1px solid lightgray;
+    margin-right:5px;
+    margin-left:50px;
+}

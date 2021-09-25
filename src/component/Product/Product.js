@@ -10,7 +10,7 @@ const Product = (props) => {
     for(const feature of features) {
         // const featureDetails = Object.entries(feature);
         const featureDetails = feature ? feature : 'No feature available';
-        console.log(featureDetails);
+        // console.log(featureDetails);
     }
 
     return (

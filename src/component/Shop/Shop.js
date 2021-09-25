@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
+import logo from '../../images/logo.png';
 import {addToDb} from '../../utilities/fakedb.js';
 import {getStoredCart} from '../../utilities/fakedb.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -61,12 +62,23 @@ const Shop = () => {
 
     const handleAddToCart = (product) => {
         // console.log(product);
-        const newCart = [...cart, product]
-        setCart(newCart);
+        // const newCart = [...cart, product]
+        // setCart(newCart);
+        // addToDb(product.key);
 
-        // Add to LocalStorage
-        addToDb(product.key);
+        const newCart = [...cart];
+        const existing = cart.find(c => c.key === product.key);
+        if(existing){
+            product.quantity = product.quantity + 1;
+        }
+        else{
+            product.quantity = 1;
+            newCart.push(product);
+        }
+        setCart(newCart);
+        addToDb(product.key)
     }
+
 
     const handleSearch = event => {
         // console.log(event.target.value);
@@ -78,6 +90,7 @@ const Shop = () => {
     return (
         <div>
             <div className="search-container">
+                <img className="logo" src={logo} alt="" />
                 <input type="text" onChange={handleSearch} placeholder="Type here to search........." />
                 <p><FontAwesomeIcon icon={faShoppingCart} /> <span>{cart.length}</span></p>
             </div>

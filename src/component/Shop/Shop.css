@@ -5,6 +5,11 @@
     background-color: rgb(231, 231, 231);
     border-bottom: 2px solid #06abeb;
     padding: 7px 0px;
+    position: fixed;
+    top: 42px;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 .search-container input{
    width: 60%;
@@ -36,9 +41,14 @@
 .shop-container{
     display: grid;
     grid-template-columns: 3fr 1fr;
+    padding-top: 100px;
 }
 .product-container{
     border-right: 1px solid lightgray;
     margin-right:5px;
     margin-left:50px;
+}
+.cart-container{
+    position: fixed;
+    right:170px
 }

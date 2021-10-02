@@ -7,6 +7,8 @@ import {addToDb} from '../../utilities/fakedb.js';
 import {getStoredCart} from '../../utilities/fakedb.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import AddToCart from '../AddToCart/AddToCart';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -66,14 +68,29 @@ const Shop = () => {
         // setCart(newCart);
         // addToDb(product.key);
 
-        const newCart = [...cart];
-        const existing = cart.find(c => c.key === product.key);
+        // const newCart = [...cart];
+        // const existing = cart.find(c => c.key === product.key);
+        // if(existing){
+        //     product.quantity = product.quantity + 1;
+        // }
+        // else{
+        //     product.quantity = 1;
+        //     newCart.push(product);
+        // }
+        // setCart(newCart);
+        // addToDb(product.key)
+
+        // Janker vai solution two time add product
+        const existing = cart.find(pd => pd.key === product.key);
+        let newCart = [];
         if(existing){
-            product.quantity = product.quantity + 1;
+            const rest = cart.filter(pd => pd.key !== product.key);
+            existing.quantity = existing.quantity + 1;
+            newCart = [...rest, product]
         }
         else{
             product.quantity = 1;
-            newCart.push(product);
+            newCart = [...cart, product]
         }
         setCart(newCart);
         addToDb(product.key)
@@ -92,18 +109,27 @@ const Shop = () => {
             <div className="search-container">
                 <img className="logo" src={logo} alt="" />
                 <input type="text" onChange={handleSearch} placeholder="Type here to search........." />
-                <p><FontAwesomeIcon icon={faShoppingCart} /> <span>{cart.length}</span></p>
+                <p><FontAwesomeIcon icon={faShoppingCart} /> <span><AddToCart cart={cart}></AddToCart></span></p>
             </div>
             <div className="shop-container">
                 <div className="product-container">
                     {/* <h1>Product: {products.length}</h1> */}
                     {
-                        // products.map(product => <Product product={product} key={product.key} handleAddToCart={handleAddToCart}></Product>)
-                        displayProducts.map(product => <Product product={product} key={product.key} handleAddToCart={handleAddToCart}></Product>)
+                        // products?.map(product => <Product product={product} key={product.key} handleAddToCart={handleAddToCart}></Product>)
+                        // displayProducts?.map(product => <Product product={product} key={product.key} handleAddToCart={handleAddToCart}></Product>)
+                        
+                        displayProducts?.length === 0 ?
+                        <h2 style={{textAlign: 'center', color: '#06abeb', marginTop: '100px'}}>Loading...</h2>
+                        :
+                        displayProducts?.map(product => <Product product={product} key={product.key} handleAddToCart={handleAddToCart}></Product>)
                     }
                 </div>
                 <div className="cart-container">
-                    <Cart cart={cart}></Cart>
+                    <Cart cart={cart}>
+                        <Link to="/review">
+                            <button className="btn-regular">Review Your Order</button>
+                        </Link>
+                    </Cart>
                 </div>
             </div>
         </div>
